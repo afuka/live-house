@@ -1,2 +1,1 @@
-# live-house
-gin admin vue
+# live-house 蹦迪指南
