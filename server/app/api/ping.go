@@ -8,8 +8,5 @@ import (
 
 // Ping 测试连通性
 func Ping(c *gin.Context) {
-	c.JSON(200, response.Response{
-		Code: 0,
-		Msg:  "Ping",
-	})
+	response.Result(c, response.Success, "success")
 }

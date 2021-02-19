@@ -8,5 +8,5 @@ import (
 
 // InitAPIRouter 初始化 api 的路由
 func InitAPIRouter(r *gin.RouterGroup) {
-	r.GET("hello", api.Ping)
+	r.GET("ping", api.Ping)
 }

@@ -2,21 +2,17 @@ package initialize
 
 import (
 	"afkser/utils"
-	"os"
 	"strconv"
 
 	"github.com/go-redis/redis"
 )
 
-// RedisClient Redis缓存客户端单例
-var RedisClient *redis.Client
-
-// Redis 在中间件中初始化redis链接
-func Redis() {
-	db, _ := strconv.ParseUint(os.Getenv("REDIS_DB"), 10, 64)
+// NewRedis 在中间件中初始化redis链接
+func NewRedis(addr, password, dbselect string) *redis.Client {
+	db, _ := strconv.ParseUint(dbselect, 10, 64)
 	client := redis.NewClient(&redis.Options{
-		Addr:       os.Getenv("REDIS_ADDR"),
-		Password:   os.Getenv("REDIS_PW"),
+		Addr:       addr,
+		Password:   password,
 		DB:         int(db),
 		MaxRetries: 1,
 	})
@@ -27,5 +23,5 @@ func Redis() {
 		utils.Log().Panic("连接Redis不成功", err)
 	}
 
-	RedisClient = client
+	return client
 }

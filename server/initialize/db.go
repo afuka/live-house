@@ -10,11 +10,10 @@ import (
 	_ "github.com/jinzhu/gorm/dialects/mysql"
 )
 
-// DB 数据库链接单例
-var DB *gorm.DB
+// NewDatabase 在中间件中初始化mysql链接
+func NewDatabase(user, password, path, dbname, config string) *gorm.DB {
 
-// Database 在中间件中初始化mysql链接
-func Database(connString string) {
+	connString := user + ":" + password + "@tcp(" + path + ")/" + dbname + "?" + config
 	db, err := gorm.Open("mysql", connString)
 	db.LogMode(true)
 	// Error
@@ -29,5 +28,5 @@ func Database(connString string) {
 	//超时
 	db.DB().SetConnMaxLifetime(time.Second * 30)
 
-	DB = db
+	return db
 }

@@ -1,5 +1,7 @@
 package response
 
+import "github.com/gin-gonic/gin"
+
 // Response 基础序列化器
 type Response struct {
 	Code int         `json:"error_code"`
@@ -27,3 +29,20 @@ const (
 	// PermissionErr 权限错误
 	PermissionErr int = 50000
 )
+
+// Result 响应json
+func Result(c *gin.Context, code int, msg string) {
+	c.JSON(200, Response{
+		Code: code,
+		Msg:  msg,
+	})
+}
+
+// ResultWithData 带Data响应
+func ResultWithData(c *gin.Context, code int, msg string, data interface{}) {
+	c.JSON(200, Response{
+		Code: code,
+		Msg:  msg,
+		Data: data,
+	})
+}

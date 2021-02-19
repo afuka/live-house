@@ -8,6 +8,7 @@ import (
 // Migration 生成表
 func Migration() {
 	fmt.Println("Migration------开始执行")
+	migrations.MigrationAdmin()
 	migrations.MigrationUser()
 	fmt.Println("Migration------运行结束")
 }
